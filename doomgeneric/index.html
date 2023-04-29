@@ -7,7 +7,7 @@
 
   </head>
   <body>
-   
+
     <div class="spinner" id='spinner'></div>
     <div class="emscripten" id="status">Downloading...</div>
 
@@ -17,11 +17,37 @@
       <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
 
-    
+
     <div class="emscripten_border">
       <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
     </div>
-    
+
+    <style>
+      html {
+        box-sizing: border-box;
+        background-color: black;
+      }
+
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+      body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      #canvas {
+        /* Fit to screen and convert the original 16:10 aspect ratio to match intended 4:3 display. */
+        width: 100vw;
+        height: calc(100vh / 1.2);
+        object-fit: contain;
+        /* aspect-ratio doesn't seem to work, so use `transform` instead. */
+        transform: scaleY(1.2);
+        transform-origin: top;
+        image-rendering: pixelated;
+      }
+    </style>
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
@@ -32,7 +58,7 @@
         preRun: [],
         postRun: [],
         print: (function() {
-          
+
         })(),
         canvas: (function() {
           var canvas = document.getElementById('canvas');
@@ -85,5 +111,3 @@
     <script async type="text/javascript" src="doomgeneric.js"></script>
   </body>
 </html>
-
-
